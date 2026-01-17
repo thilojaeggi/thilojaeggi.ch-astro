@@ -3,6 +3,8 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
 
 :root {
 	--accent: #2337ff;
@@ -13,25 +15,27 @@
 	--gray-dark: 34, 41, 57;
 	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
 	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
-		rgba(var(--gray), 33%);
+		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
 }
+
+/* Register your custom font family and tell the browser where to find it. */
 @font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-regular.woff") format("woff");
-	font-weight: 400;
+	font-family: 'Druk Wide Bold';
+	src: url('/fonts/DrukWideBold.ttf') format('truetype');
+	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
 }
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-bold.woff") format("woff");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
+
+@theme {
+	--font-sans: 'Inter Variable', 'sans-serif';
 }
+
+.logo {
+	font-family: 'Druk Wide Bold', sans-serif;
+}
+
 body {
-	font-family: "Atkinson", sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -42,13 +46,23 @@ body {
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
+
+.home {
+	background: #0000f5;
+}
+
 main {
 	width: 720px;
 	max-width: calc(100% - 2em);
-	margin: auto;
+	margin: 0 auto;
+	flex: 1;
 	padding: 3em 1em;
 }
+
 h1,
 h2,
 h3,
@@ -59,78 +73,99 @@ h6 {
 	color: rgb(var(--black));
 	line-height: 1.2;
 }
+
 h1 {
 	font-size: 3.052em;
 }
+
 h2 {
 	font-size: 2.441em;
 }
+
 h3 {
 	font-size: 1.953em;
 }
+
 h4 {
 	font-size: 1.563em;
 }
+
 h5 {
 	font-size: 1.25em;
 }
+
 strong,
 b {
 	font-weight: 700;
 }
+
 a {
 	color: var(--accent);
 }
+
 a:hover {
 	color: var(--accent);
 }
+
 p {
 	margin-bottom: 1em;
 }
+
 .prose p {
 	margin-bottom: 2em;
 }
+
 textarea {
 	width: 100%;
 	font-size: 16px;
 }
+
 input {
 	font-size: 16px;
 }
+
 table {
 	width: 100%;
 }
+
 img {
 	max-width: 100%;
 	height: auto;
 	border-radius: 8px;
 }
+
 code {
 	padding: 2px 5px;
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
 }
+
 pre {
 	padding: 1.5em;
 	border-radius: 8px;
 }
-pre > code {
+
+pre>code {
 	all: unset;
 }
+
 blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
 	margin: 0;
 	font-size: 1.333em;
 }
+
 hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
 }
+
 @media (max-width: 720px) {
 	body {
 		font-size: 18px;
 	}
+
 	main {
 		padding: 1em;
 	}
@@ -152,4 +187,114 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+
+.animated-entry {
+	display: block;
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+
+.outline-hover {
+	transition: all 0.3s ease-in-out;
+}
+
+.outline-hover:hover {
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+	/* Will override color (regardless of order) */
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: white;
+
+}
+
+.animated-entry span {
+	display: block;
+	transform: translateY(120%);
+	animation: slideUp 1s forwards var(--animation-delay, 0s);
+}
+
+.name-part:nth-child(1) span {
+	--animation-delay: .2s;
+}
+
+.name-part:nth-child(2) span {
+	--animation-delay: .3s;
+}
+
+.name-part:nth-child(3) span {
+	--animation-delay: .4s;
+}
+
+.subtitle span {
+	--animation-delay: .5s;
+}
+
+@keyframes slideUp {
+	0% {
+		transform: translateY(120%);
+	}
+
+	to {
+		transform: translateY(0);
+	}
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+}
+
+.scale-enter-active,
+.scale-leave-active {
+	transition: all 0.3s ease;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+	opacity: 0;
+	transform: scale(0.9);
+}
+
+.no-scale.scale-enter-active,
+.no-scale.scale-leave-active {
+	transition: none !important;
+}
+
+
+.no-scale.scale-enter,
+.no-scale.scale-leave-to {
+	transform: none !important;
+}
+
+/* Slow down view transitions */
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+	animation-duration: 0.5s;
+	transition: ease-in-out;
+}
+
+/* Exclude navbar from slow transition */
+::view-transition-group(navbar),
+::view-transition-old(navbar),
+::view-transition-new(navbar) {
+	animation-duration: 0s;
+	/* Or a fast duration like 0.1s */
+}
+
+/* Reset root transition to normal speed */
+::view-transition-group(root),
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.3s;
+	transition: ease-in-out;
+
 }

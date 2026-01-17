@@ -1,0 +1,99 @@
+---
+import { getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+
+const projects = (await getCollection("projects")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+console.log("Fetched projects:", projects);
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Projects | ${SITE_TITLE}`}
+            description={SITE_DESCRIPTION}
+        />
+    </head>
+    <body>
+        <Header />
+        <main class="w-full max-w-5xl mx-auto px-4 py-8 custom-main">
+            <h1 class="text-4xl font-bold mb-8">Projects</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {
+                    projects.map((project) => (
+                        <a
+                            href={`/projects/${project.id}/`}
+                            class="block group no-underline"
+                        >
+                            <div
+                                class="bg-white rounded-xl p-6 h-full transition-transform duration-300 hover:scale-[1.02] border border-gray-800 shadow-xl"
+                                transition:name={`project-card-${project.data.title}`}
+                            >
+                                <div class="flex flex-col h-full text-black">
+                                    <h2
+                                        class="text-3xl font-bold mb-2 w-fit group-hover:text-blue-400 transition-colors"
+                                        transition:name={`project-title-${project.data.title}`}
+                                    >
+                                        {project.data.title}
+                                    </h2>
+
+                                    <div class="flex flex-wrap gap-2 text-sm mb-4 text-gray-400">
+                                        {project.data.client && (
+                                            <span
+                                                transition:name={`project-client-${project.data.title}`}
+                                            >
+                                                {project.data.client}
+                                            </span>
+                                        )}
+                                        {project.data.year && (
+                                            <>
+                                                <span>•</span>
+                                                <span
+                                                    transition:name={`project-year-${project.data.title}`}
+                                                >
+                                                    {project.data.year}
+                                                </span>
+                                            </>
+                                        )}
+                                    </div>
+
+                                    <p class="text-gray-600 mb-6 grow">
+                                        {project.data.description}
+                                    </p>
+
+                                    {project.data.technologies && (
+                                        <div class="flex flex-wrap gap-2 mt-auto">
+                                            {project.data.technologies
+                                                .slice(0, 4)
+                                                .map((tech) => (
+                                                    <div class="bg-white px-2 py-1 rounded text-xs border border-gray-800/20 flex items-center gap-2">
+                                                        <img
+                                                            src={tech.icon}
+                                                            alt={tech.name}
+                                                            class="w-4 h-4 object-contain"
+                                                        />
+                                                        <span>{tech.name}</span>
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+        </main>
+        <Footer />
+    </body><style>
+        .custom-main {
+            width: 100% !important;
+            max-width: 64rem !important; /* max-w-5xl */
+        }
+    </style>
+</html>
