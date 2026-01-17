@@ -12,13 +12,13 @@ const isHome = pathname === "/";
 			>{
 				(
 					<HomeLogo
-						class={`h-18 w-auto text-white hover:text-gray-200 transition-colors ${isHome ? "invisible" : ""}`}
+						class={`h-12 md:h-18 w-auto text-white hover:text-gray-200 transition-colors ${isHome ? "invisible" : ""}`}
 					/>
 				)
 			}</a
 		>
 		<div
-			class="internal-links self-center items-center justify-self-center"
+			class="internal-links flex gap-2 md:gap-4 self-center items-center justify-self-center"
 		>
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/projects">Projects</HeaderLink>

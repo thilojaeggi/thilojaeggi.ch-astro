@@ -11,7 +11,7 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 
 <a
 	href={href}
-	class="text-2xl transition-all duration-300 ease-in-out hover:scale-110"
+	class="text-lg md:text-2xl transition-all duration-300 ease-in-out hover:scale-110"
 	class:list={[className, { "scale-110 font-bold": isActive }]}
 	{...props}
 >
