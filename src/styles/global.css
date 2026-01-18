@@ -56,7 +56,6 @@ body {
 }
 
 main {
-	width: 720px;
 	max-width: calc(100% - 2em);
 	margin: 0 auto;
 	flex: 1;

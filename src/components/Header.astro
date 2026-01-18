@@ -6,58 +6,24 @@ const { pathname } = Astro.url;
 const isHome = pathname === "/";
 ---
 
-<header>
-	<nav>
-		<a href="/"
-			>{
-				(
-					<HomeLogo
-						isHeader={true}
-						class={`h-12 md:h-18 w-auto text-white hover:text-gray-200 transition-colors ${isHome ? "invisible" : ""}`}
-					/>
-				)
-			}</a
-		>
-		<div
-			class="internal-links flex gap-2 md:gap-4 self-center items-center justify-self-center"
-		>
+<header class="py-2 bg-[#0000f5]/95 backdrop-blur z-50 sticky top-0 px-4">
+	<nav class="grid grid-cols-1 sm:grid-cols-3 items-center">
+		<div class="flex justify-center">
+			<a href="/">
+				<HomeLogo
+					isHeader={true}
+					class={`h-14 md:h-18 w-auto text-white hover:text-gray-200 transition-colors ${isHome ? "hidden" : ""}`}
+				/>
+			</a>
+		</div>
+
+		<div class="flex gap-4 md:gap-4 justify-center items-center text-white">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/projects">Projects</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
+
+		<div class="hidden md:block"></div>
 	</nav>
 </header>
-<style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: rgba(0, 0, 245, 0.95);
-		backdrop-filter: blur(10px);
-		position: sticky;
-		top: 0;
-		z-index: 50;
-	}
-	nav {
-		display: grid;
-		grid-template-columns: 1fr auto 1fr;
-		align-items: center;
-	}
-	nav a {
-		padding: 0em 0.2em;
-		color: white;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
-</style>

@@ -12,27 +12,26 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body class="home bg-[#0000f5] flex flex-col">
-		<main>
-			<div class="min-h-screen flex flex-col">
-				<Header />
-				<div
-					class="w-full grow flex flex-col items-center justify-center logo"
-				>
-					<HomeLogo
-						class="text-white w-full h-auto max-w-4xl px-4 drop-shadow-2xl"
-					/>
+		<div class="min-h-screen flex flex-col">
+			<Header />
+			<div
+				class="w-full grow flex flex-col items-center justify-center logo"
+			>
+				<HomeLogo
+					class="text-white w-full h-auto max-w-4xl px-4 drop-shadow-2xl"
+				/>
 
-					<div class="animated-entry subtitle text-center">
-						<span
-							class="text-white text-lg sm:text-2xl font-semibold pt-2 tracking-wide font-sans"
-						>
-							Professional System Engineer and Hobbyist Software
-							Engineer
-						</span>
-					</div>
+				<div class="animated-entry subtitle text-center">
+					<span
+						class="text-white text-lg sm:text-2xl font-semibold pt-2 tracking-wide font-sans"
+					>
+						Professional System Engineer and Hobbyist Software
+						Engineer
+					</span>
 				</div>
 			</div>
-		</main>
+		</div>
+
 		<Footer />
 	</body>
 </html>
