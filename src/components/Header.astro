@@ -12,7 +12,7 @@ const isHome = pathname === "/";
 			<a href="/">
 				<HomeLogo
 					isHeader={true}
-					class={`h-14 md:h-18 w-auto text-white hover:text-gray-200 transition-colors ${isHome ? "hidden" : ""}`}
+					class={`h-14 md:h-18 w-auto text-white hover:text-gray-200 transition-colors ${isHome ? "hidden sm:block sm:invisible" : ""}`}
 				/>
 			</a>
 		</div>
