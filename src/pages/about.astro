@@ -9,8 +9,8 @@ const dob = new Date(2004, 3, 16);
 const today = new Date();
 let years = today.getFullYear() - dob.getFullYear();
 const hasHadBirthdayThisYear =
-	today.getMonth() > dob.getMonth() ||
-	(today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
+  today.getMonth() > dob.getMonth() ||
+  (today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
 
 if (!hasHadBirthdayThisYear) years--;
 const age = years;
@@ -18,66 +18,58 @@ const age = years;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead
-			title={`About | ${SITE_TITLE}`}
-			description={SITE_DESCRIPTION}
-		/>
-	</head>
-	<body class="flex flex-col min-h-screen">
-		<Header />
-		<main class="grow flex flex-col items-center justify-center p-4">
-			<p class="text-2xl max-w-9xl leading-relaxed">
-				I'm a {age}-year-old <span class="font-semibold"
-					>Systems Engineer</span
-				> from Switzerland, currently exploring new opportunities.<br
-				/><br />
-				My passion for cloud technologies goes well beyond the workplace.
-				In 2025, I earned the
-				<span class="font-semibold">silver medal</span> at the SwissSkills
-				in Cloud Computing, a competition focused on AWS and Linux. Competing
-				against some of the best talents in Switzerland helped me refine my
-				expertise in cloud infrastructure and automation — an experience that
-				continues to shape how I approach complex technical challenges.<br
-				/><br />
-				Outside of work, I enjoy exploring emerging trends in software and
-				hardware, experimenting with <span class="font-semibold"
-					>mixed reality</span
-				>, and developing custom tech projects. I'm especially
-				passionate about <span class="font-semibold">open source</span>,
-				where I contribute to the global tech community. Some of my most
-				notable projects include
-				<a
-					href="https://github.com/thilojaeggi/WinGetty"
-					class="font-medium hover:text-[var(--accent-dark)] hover:underline hover:underline-offset-4 transition-colors duration-200"
-					>WinGetty</a
-				>
-				and
-				<a
-					href="https://github.com/thilojaeggi/Notely"
-					class="font-medium hover:text-[var(--accent-dark)] hover:underline hover:underline-offset-4 transition-colors duration-200"
-					>Notely</a
-				>, both available on my
-				<a
-					href="https://github.com/thilojaeggi"
-					class="font-medium hover:text-[var(--accent-dark)] hover:underline hover:underline-offset-4 transition-colors duration-200"
-					>GitHub</a
-				>.<br /><br />
-				Whether through <span class="font-semibold">AWS</span>,
-				open-source development, or hands-on hardware projects, I'm
-				always looking for new ways to innovate and push the boundaries
-				of technology.<br /><br />
-				<span class="font-semibold"
-					>If you think I could be a great fit for your team or
-					project, feel free to
-					<a
-						href="mailto:thilo0123@gmail.com"
-						class="font-medium hover:text-[var(--accent-dark)] hover:underline hover:underline-offset-4 transition-colors duration-200"
-						>get in touch</a
-					> — I'd love to hear from you.</span
-				>
-			</p>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={`About | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <Header />
+    <main class="grow flex flex-col items-center justify-center p-4">
+      <p class="text-2xl max-w-5xl leading-relaxed">
+        I'm a {age}-year-old <span class="font-semibold">Systems Engineer</span> from
+        Switzerland, currently exploring new opportunities.<br /><br />
+        My passion for cloud technologies goes well beyond the workplace. In 2025,
+        I earned the
+        <span class="font-semibold">silver medal</span> at the SwissSkills in Cloud
+        Computing, a competition focused on AWS and Linux. Competing against some
+        of the best talents in Switzerland helped me refine my expertise in cloud
+        infrastructure and automation — an experience that continues to shape how
+        I approach complex technical challenges.<br /><br />
+        Outside of work, I enjoy exploring emerging trends in software and hardware,
+        experimenting with <span class="font-semibold">mixed reality</span>, and
+        developing custom tech projects. I'm especially passionate about <span
+          class="font-semibold">open source</span
+        >, where I contribute to the global tech community. Some of my most
+        notable projects include
+        <a
+          href="https://github.com/thilojaeggi/WinGetty"
+          class="font-medium hover:text-[var(--accent-dark)] hover:underline hover:underline-offset-4 transition-colors duration-200"
+          >WinGetty</a
+        >
+        and
+        <a
+          href="https://github.com/thilojaeggi/Notely"
+          class="font-medium hover:text-[var(--accent-dark)] hover:underline hover:underline-offset-4 transition-colors duration-200"
+          >Notely</a
+        >, both available on my
+        <a
+          href="https://github.com/thilojaeggi"
+          class="font-medium hover:text-[var(--accent-dark)] hover:underline hover:underline-offset-4 transition-colors duration-200"
+          >GitHub</a
+        >.<br /><br />
+        Whether through <span class="font-semibold">AWS</span>, open-source
+        development, or hands-on hardware projects, I'm always looking for new
+        ways to innovate and push the boundaries of technology.<br /><br />
+        <span class="font-semibold"
+          >If you think I could be a great fit for your team or project, feel
+          free to
+          <a
+            href="mailto:thilo0123@gmail.com"
+            class="font-medium hover:text-[var(--accent-dark)] hover:underline hover:underline-offset-4 transition-colors duration-200"
+            >get in touch</a
+          > — I'd love to hear from you.</span
+        >
+      </p>
+    </main>
+    <Footer />
+  </body>
 </html>
