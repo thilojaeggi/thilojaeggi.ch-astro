@@ -1,14 +1,14 @@
 ---
 import HomeLogo from "./HomeLogo.astro";
-import { SITE_TITLE } from "../consts";
 import HeaderLink from "./HeaderLink.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 const { pathname } = Astro.url;
 const isHome = pathname === "/";
 ---
 
-<header class="py-2 bg-[#0000f5]/95 backdrop-blur z-50 sticky top-0 px-4">
+<header class="py-2 bg-[var(--brand-blue-transparent)] backdrop-blur z-50 sticky top-0 px-4">
 	<nav class="grid grid-cols-1 sm:grid-cols-3 items-center">
-		<div class="flex justify-center">
+		<div class="flex justify-center sm:justify-start">
 			<a href="/">
 				<HomeLogo
 					isHeader={true}
@@ -24,6 +24,8 @@ const isHome = pathname === "/";
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 
-		<div class="hidden md:block"></div>
+		<div class="flex justify-center sm:justify-end pr-4">
+			<ThemeToggle />
+		</div>
 	</nav>
 </header>

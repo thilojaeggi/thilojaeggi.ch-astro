@@ -2,21 +2,21 @@
 const today = new Date();
 ---
 
-<footer class="w-full bg-white border-t border-gray-200">
+<footer class="w-full bg-[var(--footer-bg)] border-t border-[var(--footer-border)]">
 	<div
 		class="max-w-6xl mx-auto px-6 pt-3 flex flex-col md:flex-row justify-between items-center"
 	>
 		<div class="text-center md:text-left">
-			<p class="text-sm text-gray-500 leading-relaxed">
+			<p class="text-sm text-[rgb(var(--gray))] leading-relaxed">
 				&copy; {today.getFullYear()}
-				<span class="font-medium text-gray-900">Thilo Jaeggi</span><br
+				<span class="font-medium text-[rgb(var(--black))]">Thilo Jaeggi</span><br
 				/>
 			</p>
 		</div>
 
 		<div class="flex items-center gap-5 pb-3">
 			<a
-				class="text-gray-400 hover:text-blue-500 transition-all duration-300 transform group"
+				class="text-[rgb(var(--gray))] hover:text-blue-500 transition-all duration-300 transform group"
 				href="https://twitter.com/thilofinn"
 				target="_blank"
 				rel="noopener noreferrer"
@@ -38,7 +38,7 @@ const today = new Date();
 				</div>
 			</a>
 			<a
-				class="text-gray-400 hover:text-gray-900 transition-all duration-300 transform group"
+				class="text-[rgb(var(--gray))] hover:text-[rgb(var(--black))] transition-all duration-300 transform group"
 				href="https://github.com/thilojaeggi"
 				target="_blank"
 				rel="noopener noreferrer"

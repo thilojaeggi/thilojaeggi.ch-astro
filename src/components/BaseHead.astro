@@ -33,6 +33,32 @@ const imageSrc = typeof image === "string" ? image : image.src;
 <meta name="generator" content={Astro.generator} />
 <ClientRouter />
 
+<!-- Theme script -->
+<script is:inline>
+	const theme = (() => {
+		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+			return localStorage.getItem('theme');
+		}
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			return 'dark';
+		}
+		return 'light';
+	})();
+
+	if (theme === 'light') {
+		document.documentElement.dataset.theme = 'light';
+	} else {
+		document.documentElement.dataset.theme = 'dark';
+	}
+
+	window.localStorage.setItem('theme', theme);
+
+	document.addEventListener('astro:after-swap', () => {
+		const theme = localStorage.getItem('theme');
+		document.documentElement.dataset.theme = theme;
+	});
+</script>
+
 <!-- Font preloads -->
 <link
 	rel="preload"

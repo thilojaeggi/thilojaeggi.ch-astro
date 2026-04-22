@@ -32,18 +32,18 @@ console.log("Fetched projects:", projects);
                             class="block group no-underline"
                         >
                             <div
-                                class="bg-white rounded-sm p-6 h-full transition-all duration-300 hover:border-blue-400/50 border-2 border-transparent shadow-xl ring-1 ring-gray-200"
+                                class="bg-[var(--card-bg)] rounded-sm p-6 h-full transition-all duration-300 hover:border-blue-400/50 border-2 border-transparent shadow-xl ring-1 ring-[var(--card-border)]"
                                 transition:name={`project-card-${project.data.title}`}
                             >
-                                <div class="flex flex-col h-full text-black transition-transform duration-300 group-hover:-translate-y-1">
+                                <div class="flex flex-col h-full text-[rgb(var(--black))] transition-transform duration-300 group-hover:-translate-y-1">
                                     <h2
-                                        class="text-3xl font-bold mb-2 w-fit group-hover:text-blue-600 transition-colors"
+                                        class="text-3xl font-bold mb-2 w-fit group-hover:text-[var(--accent)] transition-colors"
                                         transition:name={`project-title-${project.data.title}`}
                                     >
                                         {project.data.title}
                                     </h2>
 
-                                    <div class="flex flex-wrap gap-2 text-sm mb-4 text-gray-400">
+                                    <div class="flex flex-wrap gap-2 text-sm mb-4 text-[rgb(var(--gray))]">
                                         {project.data.client && (
                                             <span
                                                 transition:name={`project-client-${project.data.title}`}
@@ -63,7 +63,7 @@ console.log("Fetched projects:", projects);
                                         )}
                                     </div>
 
-                                    <p class="text-gray-600 mb-6 grow">
+                                    <p class="text-[rgb(var(--gray-dark))] mb-6 grow opacity-90">
                                         {project.data.description}
                                     </p>
 

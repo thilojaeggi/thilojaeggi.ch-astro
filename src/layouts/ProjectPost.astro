@@ -34,7 +34,7 @@ const {
                     class="py-2 w-full backdrop-blur-md top-0 z-10 flex flex-row items-center justify-between"
                 >
                     <h1
-                        class="text-6xl font-bold w-fit text-black"
+                        class="text-6xl font-bold w-fit text-[rgb(var(--black))]"
                         transition:name={`project-title-${title}`}
                     >
                         {title}
@@ -46,7 +46,7 @@ const {
                                     class="w-fit"
                                     transition:name={`project-year-${title}`}
                                 >
-                                    <span class="text-gray-600">{year}</span>
+                                    <span class="text-[rgb(var(--gray))]">{year}</span>
                                 </div>
                             )
                         }
@@ -56,7 +56,7 @@ const {
                                     class="w-fit"
                                     transition:name={`project-client-${title}`}
                                 >
-                                    <span class="text-gray-600">{client}</span>
+                                    <span class="text-[rgb(var(--gray))]">{client}</span>
                                 </div>
                             )
                         }
@@ -67,8 +67,8 @@ const {
                         {
                             stats &&
                                 stats.map((stat) => (
-                                    <div class="bg-gray-100 px-3 py-1 rounded-md border border-gray-200">
-                                        <span class="font-bold text-gray-900">
+                                    <div class="bg-[var(--chip-bg)] px-3 py-1 rounded-md border border-[var(--chip-border)]">
+                                        <span class="font-bold text-[var(--chip-text)]">
                                             {stat}
                                         </span>
                                     </div>
@@ -100,7 +100,7 @@ const {
                                 >
                                     <div class="transition-transform duration-300 group-hover:-translate-y-1">
                                         <svg
-                                            class="fill-black w-12 h-12"
+                                            class="fill-[rgb(var(--black))] w-12 h-12"
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
                                         >
@@ -114,7 +114,7 @@ const {
                         {
                             links?.website && (
                                 <a
-                                    class="ml-6 transition-all duration-300 hover:text-blue-600 hover:translate-x-1 font-semibold text-lg text-black inline-flex items-center gap-1 group"
+                                    class="ml-6 transition-all duration-300 hover:text-[var(--accent)] hover:translate-x-1 font-semibold text-lg text-[rgb(var(--black))] inline-flex items-center gap-1 group"
                                     target="_blank"
                                     href={links.website}
                                 >
@@ -128,13 +128,13 @@ const {
                     </div>
 
                     <div
-                        class="border-b-2 border-gray-300 rounded-full w-full mt-4"
+                        class="border-b-2 border-[rgb(var(--gray-light))] rounded-full w-full mt-4"
                     >
                     </div>
                 </div>
 
                 <div
-                    class="project-content text-xl max-w-5xl pt-4 text-gray-800"
+                    class="project-content text-xl max-w-5xl pt-4 text-[rgb(var(--gray-dark))]"
                 >
                     <slot />
                 </div>
