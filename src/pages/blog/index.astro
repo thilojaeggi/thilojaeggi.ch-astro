@@ -51,7 +51,8 @@ const posts = (await getCollection("blog")).sort(
 			}
 			ul li img {
 				margin-bottom: 0.5rem;
-				border-radius: 12px;
+				border-radius: 2px;
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
 			}
 			ul li a {
 				display: block;
@@ -65,12 +66,16 @@ const posts = (await getCollection("blog")).sort(
 				margin: 0;
 				color: rgb(var(--gray));
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
+			ul li a:hover h4 {
+				color: var(--accent);
+				transform: translateX(4px);
 			}
-			ul a:hover img {
+			ul li a:hover .date {
+				color: var(--accent);
+			}
+			ul li a:hover img {
 				box-shadow: var(--box-shadow);
+				transform: translateY(-4px);
 			}
 			@media (max-width: 720px) {
 				ul {

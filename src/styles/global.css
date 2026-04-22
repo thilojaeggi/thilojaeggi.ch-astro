@@ -152,6 +152,40 @@ hr {
 	border-top: 1px solid rgb(var(--gray-light));
 }
 
+a, button {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-premium {
+	position: relative;
+	color: inherit;
+	text-decoration: none;
+	transition: color 0.3s ease, transform 0.3s ease;
+	display: inline-block;
+}
+
+.link-premium:hover {
+	color: var(--accent);
+}
+
+.link-premium::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	bottom: 0;
+	left: 0;
+	background-color: var(--accent);
+	transform: scale-x(0);
+	transform-origin: bottom right;
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-premium:hover::after {
+	transform: scale-x(1);
+	transform-origin: bottom left;
+}
+
 @media (max-width: 720px) {
 	body {
 		font-size: 18px;
@@ -189,16 +223,15 @@ hr {
 }
 
 .outline-hover {
-	transition: all 0.3s ease-in-out;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .outline-hover:hover {
 	color: transparent;
 	-webkit-text-fill-color: transparent;
-	/* Will override color (regardless of order) */
-	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-width: 1.5px;
 	-webkit-text-stroke-color: white;
-
+	transform: translateY(-2px);
 }
 
 .animated-entry span {

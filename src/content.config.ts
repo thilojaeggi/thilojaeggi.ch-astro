@@ -26,7 +26,7 @@ const projects = defineCollection({
 			year: z.union([z.string(), z.number()]).optional(),
 			technologies: z.array(z.object({
 				name: z.string(),
-				icon: z.string()
+				icon: z.string().optional()
 			})).optional(),
 			links: z.object({
 				github: z.string().optional(),

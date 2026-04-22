@@ -3,6 +3,23 @@ const { name, icon: customIcon } = Astro.props;
 
 const key = name?.toLowerCase().replace(/[^a-z0-9]/g, "");
 
+// Simple Icons slugs often follow specific patterns or have overrides
+const slugOverrides: Record<string, string> = {
+    "vue": "vuedotjs",
+    "vue.js": "vuedotjs",
+    "alpine.js": "alpinedotjs",
+    "node.js": "nodedotjs",
+    "express": "express",
+    "tailwindcss": "tailwindcss",
+    "tailwind": "tailwindcss",
+    "flask": "flask",
+    "python": "python",
+    "flutter": "flutter",
+    "axios": "axios",
+};
+
+const slug = slugOverrides[name?.toLowerCase()] || name?.toLowerCase().replace(/ /g, "-");
+
 const icons: Record<string, string> = {
     flutter: `<svg role="img" viewBox="0 0 24 24" fill="#02569B" xmlns="http://www.w3.org/2000/svg"><title>Flutter</title><path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.357zm.014 11.072L7.857 17.53l6.47 6.47H21.7l-6.46-6.468 6.46-6.46h-7.37z"/></svg>`,
     vue: `<svg fill="#4FC08D" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Vue.js</title><path d="M24,1.61H14.06L12,5.16,9.94,1.61H0L12,22.39ZM12,14.08,5.16,2.23H9.59L12,6.41l2.41-4.18h4.43Z"/></svg>`,
@@ -13,23 +30,34 @@ const icons: Record<string, string> = {
     tailwindcss: `<svg fill="#06B6D4" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Tailwind CSS</title><path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z"/></svg>`,
 };
 
-const icon = icons[key] || null;
+const internalIcon = icons[key] || null;
+const isFavicon = customIcon?.includes("favicon");
+const useInternal = !!internalIcon;
+const useCDNFallback = !useInternal && isFavicon;
+const cdnUrl = `https://cdn.simpleicons.org/${slug}`;
 ---
 
 <div
     class="flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200 hover:bg-gray-200 transition-colors"
 >
     {
-        icon ? (
+        useInternal ? (
             <Fragment
-                set:html={icon.replace(
+                set:html={internalIcon.replace(
                     "<svg",
                     '<svg class="w-6 h-6 object-contain"',
                 )}
             />
-        ) : customIcon ? (
+        ) : customIcon && !isFavicon ? (
             <img src={customIcon} alt={name} class="w-6 h-6 object-contain" />
-        ) : null
+        ) : (
+            <img 
+                src={cdnUrl} 
+                alt={name} 
+                class="w-6 h-6 object-contain"
+                onerror="this.style.display='none'"
+            />
+        )
     }
     <span class="text-sm font-medium text-gray-900">{name}</span>
 </div>

@@ -11,20 +11,22 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 
 <a
 	href={href}
-	class="text-lg md:text-2xl transition-all duration-300 ease-in-out hover:scale-110"
-	class:list={[className, { "scale-110 font-bold": isActive }]}
+	class="text-lg md:text-2xl transition-all duration-300 ease-in-out relative group inline-block"
+	class:list={[className, { "font-bold text-white": isActive, "text-white/70": !isActive }]}
 	{...props}
 >
-	<slot />
+	<span class="inline-block transition-transform duration-300 group-hover:-translate-y-1">
+		<slot />
+	</span>
+	<span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" class:list={[{ "scale-x-100": isActive }]}></span>
 </a>
 <style>
 	a {
-		/* Use text-stroke to simulate variable font weight for smooth transition */
-		-webkit-text-stroke: 0px currentColor;
-		paint-order: stroke fill;
+		/* Use transition for smooth color appearance */
+		transition: color 0.3s ease;
 	}
 
 	a:hover {
-		-webkit-text-stroke: 1px currentColor;
+		color: white !important;
 	}
 </style>
