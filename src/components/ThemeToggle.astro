@@ -2,104 +2,108 @@
 ---
 
 <button
-	id="theme-toggle"
-	class="relative flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-white/10 transition-all duration-300 active:scale-90"
-	aria-label="Toggle dark mode"
+  id="theme-toggle"
+  class="theme-toggle"
+  aria-label="Toggle dark mode"
 >
-	<div class="icon-container relative w-6 h-6">
-		<div class="sun-icon-wrapper absolute inset-0 flex items-center justify-center transition-all duration-500 ease-spring">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2.5"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				class="text-white sun-icon transition-colors hover:text-yellow-200"
-			>
-				<circle cx="12" cy="12" r="5"></circle>
-				<line x1="12" y1="1" x2="12" y2="3"></line>
-				<line x1="12" y1="21" x2="12" y2="23"></line>
-				<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-				<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-				<line x1="1" y1="12" x2="3" y2="12"></line>
-				<line x1="21" y1="12" x2="23" y2="12"></line>
-				<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-				<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-			</svg>
-		</div>
-		<div class="moon-icon-wrapper absolute inset-0 flex items-center justify-center transition-all duration-500 ease-spring">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="24"
-				height="24"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2.5"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				class="text-white moon-icon transition-colors hover:text-blue-200"
-			>
-				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-			</svg>
-		</div>
-	</div>
+  <div class="icon-container">
+    <div class="sun-icon-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </div>
+    <div class="moon-icon-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </div>
+  </div>
 </button>
 
 <style>
-	#theme-toggle {
-		background: transparent;
-		border: none;
-        outline: none;
-	}
+  .theme-toggle {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    color: white;
+    transition: background 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-	.ease-spring {
-		transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	}
+  .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
 
-	.sun-icon-wrapper {
-		opacity: 1;
-		transform: rotate(0) scale(1);
-	}
+  .theme-toggle:active {
+    transform: scale(0.9);
+  }
 
-	.moon-icon-wrapper {
-		opacity: 0;
-		transform: rotate(90deg) scale(0);
-	}
+  .icon-container {
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
 
-	:root[data-theme='dark'] .sun-icon-wrapper {
-		opacity: 0;
-		transform: rotate(-90deg) scale(0);
-	}
+  .sun-icon-wrapper,
+  .moon-icon-wrapper {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
 
-	:root[data-theme='dark'] .moon-icon-wrapper {
-		opacity: 1;
-		transform: rotate(0) scale(1);
-	}
+  .sun-icon-wrapper {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  .moon-icon-wrapper {
+    opacity: 0;
+    transform: rotate(90deg) scale(0);
+  }
+
+  :root[data-theme='dark'] .sun-icon-wrapper {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0);
+  }
+
+  :root[data-theme='dark'] .moon-icon-wrapper {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
 </style>
 
 <script>
-	function updateThemeToggle() {
-		const toggle = document.getElementById('theme-toggle');
-		
-		if (toggle) {
-			toggle.onclick = () => {
-				const currentTheme = document.documentElement.dataset.theme;
-				const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-				
-				document.documentElement.dataset.theme = newTheme;
-				localStorage.setItem('theme', newTheme);
-			};
-		}
-	}
+  function updateThemeToggle() {
+    const toggle = document.getElementById('theme-toggle');
 
-	// Initialize
-	updateThemeToggle();
+    if (toggle) {
+      toggle.onclick = () => {
+        const currentTheme = document.documentElement.dataset.theme;
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
-	// Support View Transitions
-	document.addEventListener('astro:after-swap', updateThemeToggle);
+        document.documentElement.dataset.theme = newTheme;
+        localStorage.setItem('theme', newTheme);
+      };
+    }
+  }
+
+  // Initialize
+  updateThemeToggle();
+
+  // Support View Transitions
+  document.addEventListener('astro:after-swap', updateThemeToggle);
 </script>
