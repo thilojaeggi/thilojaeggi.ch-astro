@@ -12,7 +12,7 @@ const isHome = pathname === "/";
   <nav
     class="flex items-center justify-between max-w-7xl mx-auto sm:grid sm:grid-cols-3"
   >
-    <div class={`flex justify-start ${isHome ? "hidden sm:flex" : "flex"}`}>
+    <div class={`flex justify-start ${isHome ? "invisible" : "flex"}`}>
       <a href="/">
         <HomeLogo
           isHeader={true}
