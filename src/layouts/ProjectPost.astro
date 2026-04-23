@@ -87,6 +87,7 @@ const {
               links?.github && (
                 <a
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="inline-block transition-all duration-300 group active:scale-95"
                   href={links.github}
                   aria-label="GitHub Repository"
@@ -109,7 +110,9 @@ const {
                 <a
                   class="transition-all duration-300 hover:text-[var(--accent)] font-semibold text-base text-[rgb(var(--black))] inline-flex items-center gap-1.5 group"
                   target="_blank"
+                  rel="noopener noreferrer"
                   href={links.website}
+                  aria-label={`Visit official site for ${title}`}
                 >
                   Visit Official Site
                   <svg

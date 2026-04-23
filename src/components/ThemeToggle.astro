@@ -87,16 +87,24 @@
 </style>
 
 <script>
+  function updateToggleLabel(toggle: HTMLElement) {
+    const isDark = document.documentElement.dataset.theme === 'dark';
+    toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+
   function updateThemeToggle() {
     const toggle = document.getElementById('theme-toggle');
 
     if (toggle) {
+      updateToggleLabel(toggle);
+
       toggle.onclick = () => {
         const currentTheme = document.documentElement.dataset.theme;
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
         document.documentElement.dataset.theme = newTheme;
         localStorage.setItem('theme', newTheme);
+        updateToggleLabel(toggle);
       };
     }
   }

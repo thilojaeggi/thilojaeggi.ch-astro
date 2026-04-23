@@ -13,7 +13,7 @@ const isHome = pathname === "/";
     class="flex items-center justify-between max-w-7xl mx-auto sm:grid sm:grid-cols-3"
   >
     <div class={`flex justify-start ${isHome ? "invisible" : "flex"}`}>
-      <a href="/">
+      <a href="/" aria-label="Home">
         <HomeLogo
           isHeader={true}
           class={`h-10 sm:h-14 md:h-18 w-auto text-white hover:text-gray-200 transition-colors ${isHome ? "invisible" : ""}`}
