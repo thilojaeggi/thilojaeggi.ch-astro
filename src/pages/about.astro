@@ -23,43 +23,54 @@ const age = years;
   </head>
   <body class="flex flex-col min-h-screen">
     <Header />
-    <main class="grow flex flex-col items-center justify-center p-4">
-      <p class="text-2xl max-w-5xl leading-relaxed">
-        I'm a {age}-year-old <span class="font-semibold">DevOps Engineer</span> from
-        Switzerland, currently working at <span class="font-semibold">PostFinance</span>.<br /><br />
-        My passion for cloud technologies goes well beyond the workplace. In 2025,
-        I earned the
-        <span class="font-semibold">silver medal</span> at the SwissSkills in Cloud
-        Computing, a competition focused on AWS and Linux. Competing against some
-        of the best talents in Switzerland helped me refine my expertise in cloud
-        infrastructure and automation — an experience that continues to shape how
-        I approach complex technical challenges.<br /><br />
-        Outside of work, I enjoy exploring emerging trends in software and hardware,
-        experimenting with <span class="font-semibold">mixed reality</span>, and
-        developing custom tech projects. I'm especially passionate about <span
-          class="font-semibold">open source</span
-        >, where I contribute to the global tech community. Some of my most
-        notable projects include
-        <a
-          href="https://github.com/thilojaeggi/WinGetty"
-          class="link-premium font-semibold"
-          >WinGetty</a
-        >
-        and
-        <a
-          href="https://github.com/thilojaeggi/Notely"
-          class="link-premium font-semibold"
-          >Notely</a
-        >, both available on my
-        <a
-          href="https://github.com/thilojaeggi"
-          class="link-premium font-semibold"
-          >GitHub</a
-        >.<br /><br />
-        Whether through <span class="font-semibold">AWS</span>, open-source
-        development, or hands-on hardware projects, I'm always looking for new
-        ways to innovate and push the boundaries of technology.<br /><br />
-      </p>
+    <main class="grow flex flex-col items-center justify-center p-4 page-enter">
+      <div class="max-w-3xl mx-auto">
+        <h1 class="text-5xl font-bold tracking-tight mb-8">About<span class="text-[var(--accent)]">.</span></h1>
+        <div class="space-y-6 text-xl leading-relaxed text-[rgb(var(--gray-dark))]">
+          <p>
+            I'm a {age}-year-old <span class="font-semibold text-[rgb(var(--black))]">DevOps Engineer</span> from
+            Switzerland, currently working at <span class="font-semibold text-[rgb(var(--black))]">PostFinance</span>.
+          </p>
+
+          <p>
+            My passion for cloud technologies goes well beyond the workplace. In 2025,
+            I earned the
+            <span class="font-semibold text-[rgb(var(--black))]">silver medal</span> at the SwissSkills in Cloud
+            Computing, a competition focused on AWS and Linux. Competing against some
+            of the best talents in Switzerland helped me refine my expertise in cloud
+            infrastructure and automation — an experience that continues to shape how
+            I approach complex technical challenges.
+          </p>
+
+          <p>
+            Outside of work, I enjoy exploring emerging trends in software and hardware,
+            experimenting with <span class="font-semibold text-[rgb(var(--black))]">mixed reality</span>, and
+            developing custom tech projects. I'm especially passionate about <span
+              class="font-semibold text-[rgb(var(--black))]">open source</span>,
+            where I contribute to the global tech community. Some of my most
+            notable projects include
+            <a
+              href="https://github.com/thilojaeggi/WinGetty"
+              class="link-premium font-semibold"
+              >WinGetty</a>
+            and
+            <a
+              href="https://github.com/thilojaeggi/Notely"
+              class="link-premium font-semibold"
+              >Notely</a>, both available on my
+            <a
+              href="https://github.com/thilojaeggi"
+              class="link-premium font-semibold"
+              >GitHub</a>.
+          </p>
+
+          <p>
+            Whether through <span class="font-semibold text-[rgb(var(--black))]">AWS</span>, open-source
+            development, or hands-on hardware projects, I'm always looking for new
+            ways to innovate and push the boundaries of technology.
+          </p>
+        </div>
+      </div>
     </main>
     <Footer />
   </body>

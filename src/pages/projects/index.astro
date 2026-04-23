@@ -9,7 +9,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 const projects = (await getCollection("projects")).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-console.log("Fetched projects:", projects);
 ---
 
 <!doctype html>
@@ -22,9 +21,12 @@ console.log("Fetched projects:", projects);
     </head>
     <body>
         <Header />
-        <main class="w-full max-w-5xl mx-auto px-4 py-8 custom-main">
-            <h1 class="text-4xl font-bold mb-8">Projects</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <main class="w-full max-w-5xl mx-auto px-4 py-12 custom-main page-enter">
+            <div class="mb-10">
+                <h1 class="text-5xl font-bold tracking-tight">Projects</h1>
+                <p class="text-[rgb(var(--gray))] text-lg mt-2">Things I've built and contributed to.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-enter">
                 {
                     projects.map((project) => (
                         <a
@@ -32,18 +34,24 @@ console.log("Fetched projects:", projects);
                             class="block group no-underline"
                         >
                             <div
-                                class="bg-[var(--card-bg)] rounded-sm p-6 h-full transition-all duration-300 hover:border-blue-400/50 border-2 border-transparent shadow-xl ring-1 ring-[var(--card-border)]"
+                                class="project-card bg-[var(--card-bg)] rounded-xl p-6 h-full border border-[var(--card-border)] transition-all duration-400 hover:border-[var(--accent)]/30 hover:shadow-lg relative overflow-hidden"
                                 transition:name={`project-card-${project.data.title}`}
                             >
-                                <div class="flex flex-col h-full text-[rgb(var(--black))] transition-transform duration-300 group-hover:-translate-y-1">
-                                    <h2
-                                        class="text-3xl font-bold mb-2 w-fit group-hover:text-[var(--accent)] transition-colors"
-                                        transition:name={`project-title-${project.data.title}`}
-                                    >
-                                        {project.data.title}
-                                    </h2>
+                                <div class="flex flex-col h-full text-[rgb(var(--black))]">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <h2
+                                            class="text-2xl font-bold w-fit group-hover:text-[var(--accent)] transition-colors duration-300"
+                                            transition:name={`project-title-${project.data.title}`}
+                                        >
+                                            {project.data.title}
+                                        </h2>
+                                        <!-- Arrow indicator -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-1.5 opacity-0 -translate-x-2 group-hover:opacity-50 group-hover:translate-x-0 transition-all duration-300 text-[rgb(var(--gray))]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                                        </svg>
+                                    </div>
 
-                                    <div class="flex flex-wrap gap-2 text-sm mb-4 text-[rgb(var(--gray))]">
+                                    <div class="flex flex-wrap gap-2 text-sm mb-3 text-[rgb(var(--gray))]">
                                         {project.data.client && (
                                             <span
                                                 transition:name={`project-client-${project.data.title}`}
@@ -53,7 +61,7 @@ console.log("Fetched projects:", projects);
                                         )}
                                         {project.data.year && (
                                             <>
-                                                <span>•</span>
+                                                <span class="opacity-40">·</span>
                                                 <span
                                                     transition:name={`project-year-${project.data.title}`}
                                                 >
@@ -63,12 +71,12 @@ console.log("Fetched projects:", projects);
                                         )}
                                     </div>
 
-                                    <p class="text-[rgb(var(--gray-dark))] mb-6 grow opacity-90">
+                                    <p class="text-[rgb(var(--gray-dark))] mb-6 grow text-base leading-relaxed">
                                         {project.data.description}
                                     </p>
 
                                     {project.data.technologies && (
-                                        <div class="flex flex-wrap gap-2 mt-auto scale-90 origin-left">
+                                        <div class="flex flex-wrap gap-2 mt-auto">
                                             {project.data.technologies
                                                 .slice(0, 4)
                                                 .map((tech) => (
@@ -87,10 +95,20 @@ console.log("Fetched projects:", projects);
             </div>
         </main>
         <Footer />
-    </body><style>
+    </body>
+    <style>
         .custom-main {
             width: 100% !important;
             max-width: 64rem !important; /* max-w-5xl */
         }
+
+		.project-card {
+			transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+		}
+
+		.project-card:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 12px 40px var(--glow-color);
+		}
     </style>
 </html>

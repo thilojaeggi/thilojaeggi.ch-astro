@@ -10,23 +10,33 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 ---
 
 <a
-	href={href}
-	class="text-lg md:text-2xl transition-all duration-300 ease-in-out relative group inline-block"
-	class:list={[className, { "font-bold text-white": isActive, "text-white/70": !isActive }]}
-	{...props}
+  href={href}
+  class="text-lg md:text-2xl transition-all duration-300 ease-in-out relative group inline-block"
+  class:list={[
+    className,
+    {
+      "font-semibold text-white": isActive,
+      "text-white/60 font-normal": !isActive,
+    },
+  ]}
+  {...props}
 >
-	<span class="inline-block transition-transform duration-300 group-hover:-translate-y-1">
-		<slot />
-	</span>
-	<span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" class:list={[{ "scale-x-100": isActive }]}></span>
+  <span
+    class="inline-block transition-transform duration-300 group-hover:-translate-y-0.5"
+  >
+    <slot />
+  </span>
+  <span
+    class="absolute -bottom-0.5 left-0 w-full h-[2px] bg-white/90 rounded-full transform origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
+    class:list={[{ "scale-x-100": isActive }]}></span>
 </a>
 <style>
-	a {
-		/* Use transition for smooth color appearance */
-		transition: color 0.3s ease;
-	}
+  a {
+    /* Use transition for smooth color appearance */
+    transition: color 0.3s ease;
+  }
 
-	a:hover {
-		color: white !important;
-	}
+  a:hover {
+    color: white !important;
+  }
 </style>

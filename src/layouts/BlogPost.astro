@@ -26,9 +26,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
-				border-radius: 2px;
+				border-radius: 12px;
 				box-shadow: var(--box-shadow);
-				transition: transform 0.3s ease;
+				transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 			}
 			.prose {
 				width: 720px;
@@ -36,6 +36,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				margin: auto;
 				padding: 1em;
 				color: rgb(var(--gray-dark));
+				line-height: 1.8;
 			}
 			.prose a {
 				color: var(--accent);
@@ -55,10 +56,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.title h1 {
 				margin: 0 0 0.5em 0;
+				letter-spacing: -0.02em;
 			}
 			.date {
 				margin-bottom: 0.5em;
 				color: rgb(var(--gray));
+				font-size: 0.9em;
 			}
 			.last-updated-on {
 				font-style: italic;
@@ -68,7 +71,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 	<body>
 		<Header />
-		<main>
+		<main class="page-enter">
 			<article>
 				<div class="hero-image">
 					{

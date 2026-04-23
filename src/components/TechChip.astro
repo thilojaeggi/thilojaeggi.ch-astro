@@ -38,23 +38,23 @@ const cdnUrl = `https://cdn.simpleicons.org/${slug}`;
 ---
 
 <div
-    class="flex items-center gap-2 bg-[var(--chip-bg)] px-3 py-1.5 rounded-full border border-[var(--chip-border)] hover:bg-opacity-80 transition-colors"
+    class="flex items-center gap-2 bg-[var(--chip-bg)] px-3 py-1.5 rounded-lg border border-[var(--chip-border)] hover:border-[var(--accent)]/20 transition-all duration-300"
 >
     {
         useInternal ? (
             <Fragment
                 set:html={internalIcon.replace(
                     "<svg",
-                    '<svg class="w-6 h-6 object-contain"',
+                    '<svg class="w-5 h-5 object-contain"',
                 )}
             />
         ) : customIcon && !isFavicon ? (
-            <img src={customIcon} alt={name} class="w-6 h-6 object-contain" />
+            <img src={customIcon} alt={name} class="w-5 h-5 object-contain" />
         ) : (
             <img 
                 src={cdnUrl} 
                 alt={name} 
-                class="w-6 h-6 object-contain"
+                class="w-5 h-5 object-contain"
                 onerror="this.style.display='none'"
             />
         )
