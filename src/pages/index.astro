@@ -26,7 +26,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
         <div class="animated-entry subtitle text-center">
           <span
-            class="text-white text-lg sm:text-2xl font-medium pt-3 tracking-widest font-sans uppercase"
+            class="text-white text-lg sm:text-2xl font-bold pt-3 tracking-widest font-sans uppercase"
             style="letter-spacing: 0.2em;"
           >
             DevOps & Software Engineer
@@ -58,13 +58,19 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
         if (animFrameId !== null) cancelAnimationFrame(animFrameId);
         if (resizeHandler) window.removeEventListener("resize", resizeHandler);
 
-        const canvas = document.getElementById("binary-canvas") as HTMLCanvasElement | null;
+        const canvas = document.getElementById(
+          "binary-canvas",
+        ) as HTMLCanvasElement | null;
         if (!canvas) return;
 
         const ctx = canvas.getContext("2d")!;
         const spriteCache = new Map<string, HTMLCanvasElement>();
 
-        function getSprite(char: string, size: number, opacity: number): HTMLCanvasElement {
+        function getSprite(
+          char: string,
+          size: number,
+          opacity: number,
+        ): HTMLCanvasElement {
           const key = `${char}-${size}-${opacity.toFixed(2)}`;
           if (spriteCache.has(key)) return spriteCache.get(key)!;
 
@@ -83,8 +89,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
         }
 
         interface Particle {
-          x: number; y: number;
-          vx: number; vy: number;
+          x: number;
+          y: number;
+          vx: number;
+          vy: number;
           sprite: HTMLCanvasElement;
           spriteSize: number;
           rotation: number;
@@ -103,8 +111,14 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
           particles = [];
           spriteCache.clear();
           for (let i = 0; i < count; i++) {
-            const size = Math.round(Math.random() * (SIZE_MAX - SIZE_MIN) + SIZE_MIN);
-            const opacity = Math.round((Math.random() * (OPACITY_MAX - OPACITY_MIN) + OPACITY_MIN) * 100) / 100;
+            const size = Math.round(
+              Math.random() * (SIZE_MAX - SIZE_MIN) + SIZE_MIN,
+            );
+            const opacity =
+              Math.round(
+                (Math.random() * (OPACITY_MAX - OPACITY_MIN) + OPACITY_MIN) *
+                  100,
+              ) / 100;
             const char = Math.random() > 0.5 ? "1" : "0";
             particles.push({
               x: Math.random() * canvas.width,
@@ -148,7 +162,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
         spawnParticles();
         animate();
 
-        resizeHandler = () => { resize(); spawnParticles(); };
+        resizeHandler = () => {
+          resize();
+          spawnParticles();
+        };
         window.addEventListener("resize", resizeHandler);
       }
 
