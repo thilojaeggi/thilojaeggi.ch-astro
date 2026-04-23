@@ -50,113 +50,111 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
       const ROTATION_SPEED = 0.008; // Max rotation speed (±)
       // ─────────────────────────────────────────────────
 
-      const canvas = document.getElementById(
-        "binary-canvas",
-      ) as HTMLCanvasElement;
-      const ctx = canvas.getContext("2d")!;
+      let animFrameId: number | null = null;
+      let resizeHandler: (() => void) | null = null;
 
-      // Pre-render digit sprites at different sizes/opacities
-      const spriteCache = new Map<string, HTMLCanvasElement>();
+      function initBinaryCanvas() {
+        // Clean up previous instance
+        if (animFrameId !== null) cancelAnimationFrame(animFrameId);
+        if (resizeHandler) window.removeEventListener("resize", resizeHandler);
 
-      function getSprite(
-        char: string,
-        size: number,
-        opacity: number,
-      ): HTMLCanvasElement {
-        const key = `${char}-${size}-${opacity.toFixed(2)}`;
-        if (spriteCache.has(key)) return spriteCache.get(key)!;
+        const canvas = document.getElementById("binary-canvas") as HTMLCanvasElement | null;
+        if (!canvas) return;
 
-        const s = Math.ceil(size * 2);
-        const off = document.createElement("canvas");
-        off.width = s;
-        off.height = s;
-        const oc = off.getContext("2d")!;
-        oc.font = `${size}px 'Inter Variable', monospace`;
-        oc.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-        oc.textAlign = "center";
-        oc.textBaseline = "middle";
-        oc.fillText(char, s / 2, s / 2);
-        spriteCache.set(key, off);
-        return off;
-      }
+        const ctx = canvas.getContext("2d")!;
+        const spriteCache = new Map<string, HTMLCanvasElement>();
 
-      interface Particle {
-        x: number;
-        y: number;
-        vx: number;
-        vy: number;
-        sprite: HTMLCanvasElement;
-        spriteSize: number;
-        rotation: number;
-        rotationSpeed: number;
-      }
+        function getSprite(char: string, size: number, opacity: number): HTMLCanvasElement {
+          const key = `${char}-${size}-${opacity.toFixed(2)}`;
+          if (spriteCache.has(key)) return spriteCache.get(key)!;
 
-      let particles: Particle[] = [];
-
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-
-      function spawnParticles() {
-        const count = Math.floor((canvas.width * canvas.height) / DENSITY);
-        particles = [];
-        spriteCache.clear();
-        for (let i = 0; i < count; i++) {
-          const size = Math.round(
-            Math.random() * (SIZE_MAX - SIZE_MIN) + SIZE_MIN,
-          );
-          const opacity =
-            Math.round(
-              (Math.random() * (OPACITY_MAX - OPACITY_MIN) + OPACITY_MIN) * 100,
-            ) / 100;
-          const char = Math.random() > 0.5 ? "1" : "0";
-          particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * SPEED_X * 2,
-            vy: -(Math.random() * (SPEED_Y_MAX - SPEED_Y_MIN) + SPEED_Y_MIN),
-            sprite: getSprite(char, size, opacity),
-            spriteSize: Math.ceil(size * 2),
-            rotation: Math.random() * Math.PI * 2,
-            rotationSpeed: (Math.random() - 0.5) * ROTATION_SPEED * 2,
-          });
-        }
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const w = canvas.width;
-        const h = canvas.height;
-
-        for (const p of particles) {
-          p.x += p.vx;
-          p.y += p.vy;
-          p.rotation += p.rotationSpeed;
-
-          if (p.y < -40) p.y = h + 40;
-          if (p.x < -40) p.x = w + 40;
-          if (p.x > w + 40) p.x = -40;
-
-          const half = p.spriteSize / 2;
-          ctx.save();
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.rotation);
-          ctx.drawImage(p.sprite, -half, -half);
-          ctx.restore();
+          const s = Math.ceil(size * 2);
+          const off = document.createElement("canvas");
+          off.width = s;
+          off.height = s;
+          const oc = off.getContext("2d")!;
+          oc.font = `${size}px 'Inter Variable', monospace`;
+          oc.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+          oc.textAlign = "center";
+          oc.textBaseline = "middle";
+          oc.fillText(char, s / 2, s / 2);
+          spriteCache.set(key, off);
+          return off;
         }
 
-        requestAnimationFrame(animate);
-      }
+        interface Particle {
+          x: number; y: number;
+          vx: number; vy: number;
+          sprite: HTMLCanvasElement;
+          spriteSize: number;
+          rotation: number;
+          rotationSpeed: number;
+        }
 
-      resize();
-      spawnParticles();
-      animate();
+        let particles: Particle[] = [];
 
-      window.addEventListener("resize", () => {
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+
+        function spawnParticles() {
+          const count = Math.floor((canvas.width * canvas.height) / DENSITY);
+          particles = [];
+          spriteCache.clear();
+          for (let i = 0; i < count; i++) {
+            const size = Math.round(Math.random() * (SIZE_MAX - SIZE_MIN) + SIZE_MIN);
+            const opacity = Math.round((Math.random() * (OPACITY_MAX - OPACITY_MIN) + OPACITY_MIN) * 100) / 100;
+            const char = Math.random() > 0.5 ? "1" : "0";
+            particles.push({
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height,
+              vx: (Math.random() - 0.5) * SPEED_X * 2,
+              vy: -(Math.random() * (SPEED_Y_MAX - SPEED_Y_MIN) + SPEED_Y_MIN),
+              sprite: getSprite(char, size, opacity),
+              spriteSize: Math.ceil(size * 2),
+              rotation: Math.random() * Math.PI * 2,
+              rotationSpeed: (Math.random() - 0.5) * ROTATION_SPEED * 2,
+            });
+          }
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          const w = canvas.width;
+          const h = canvas.height;
+
+          for (const p of particles) {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rotation += p.rotationSpeed;
+
+            if (p.y < -40) p.y = h + 40;
+            if (p.x < -40) p.x = w + 40;
+            if (p.x > w + 40) p.x = -40;
+
+            const half = p.spriteSize / 2;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            ctx.drawImage(p.sprite, -half, -half);
+            ctx.restore();
+          }
+
+          animFrameId = requestAnimationFrame(animate);
+        }
+
         resize();
         spawnParticles();
-      });
+        animate();
+
+        resizeHandler = () => { resize(); spawnParticles(); };
+        window.addEventListener("resize", resizeHandler);
+      }
+
+      // Run on initial load and on View Transition navigations
+      initBinaryCanvas();
+      document.addEventListener("astro:page-load", initBinaryCanvas);
     </script>
   </body>
 </html>
