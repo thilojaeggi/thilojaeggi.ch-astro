@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0000f5"/>
+      <stop offset="100%" stop-color="#0010d0"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="512" height="512" rx="96" ry="96" fill="url(#bg)"/>
+  <!-- "TJ" monogram in Druk Wide Bold style — geometric, condensed, heavy -->
+  <!-- T -->
+  <path d="M 88 120 L 260 120 L 260 176 L 206 176 L 206 392 L 142 392 L 142 176 L 88 176 Z" fill="white"/>
+  <!-- J -->
+  <path d="M 272 120 L 424 120 L 424 176 L 380 176 L 380 312 Q 380 356 356 378 Q 332 400 296 400 L 272 400 Q 240 400 220 384 L 220 326 Q 238 344 264 344 L 284 344 Q 302 344 311 334 Q 318 326 318 308 L 318 176 L 272 176 Z" fill="white"/>
+</svg>
